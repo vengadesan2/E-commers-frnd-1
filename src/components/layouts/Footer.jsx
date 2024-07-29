@@ -1,9 +1,5 @@
 import React from 'react';
 import { MDBFooter } from 'mdb-react-ui-kit';
-import { BsFacebook } from "react-icons/bs";
-import { BsWhatsapp } from "react-icons/bs";
-import { BsYoutube } from "react-icons/bs";
-import { BsInstagram } from "react-icons/bs";
 import { SiHomeassistantcommunitystore } from "react-icons/si";
 import { IoMdMail } from "react-icons/io";
 import { FaPhoneVolume } from "react-icons/fa6";
@@ -32,16 +28,16 @@ export default function Footer() {
             <div className="col-md-4 mb-4 text-center">
               <h6 className="text-uppercase fw-bold mb-4" style={{ color: '#2F4F4F' }}>Quick Links</h6>
               <p>
-                <a href='https://frontend-omega-eight-94.vercel.app/login' className='text-reset' style={{ textDecoration: 'none' }}>Login</a>
+                <a href='https://e-commers-frnd-1.vercel.app/login' className='text-reset' style={{ textDecoration: 'none' }}>Login</a>
               </p>
               <p>
-                <a href='https://frontend-omega-eight-94.vercel.app/cart' className='text-reset' style={{ textDecoration: 'none' }}>Cart</a>
+                <a href='https://e-commers-frnd-1.vercel.app/cart' className='text-reset' style={{ textDecoration: 'none' }}>Cart</a>
               </p>
               <p>
-                <a href='https://frontend-omega-eight-94.vercel.app/orders' className='text-reset' style={{ textDecoration: 'none' }}>Orders</a>
+                <a href='https://e-commers-frnd-1.vercel.app/order/confirm' className='text-reset' style={{ textDecoration: 'none' }}>Orders</a>
               </p>
               <p>
-                <a href='https://frontend-omega-eight-94.vercel.app/track/shipment' className='text-reset' style={{ textDecoration: 'none' }}>Track Your Order</a>
+                <a href='https://e-commers-frnd-1.vercel.app/shipping' className='text-reset' style={{ textDecoration: 'none' }}>Track Your Order</a>
               </p>
             </div>
 
@@ -64,7 +60,7 @@ export default function Footer() {
       <div className='text-center p-4' style={{ backgroundColor: '#2F4F4F', color:'white'}}>
         © 2024 Copyright : &nbsp; 
         <a className='text-reset fw-bold' href='http://localhost:3000/' style={{ textDecoration: 'none' }}>
-          Wonder Aqua Garden
+          shoope
         </a>
       </div>
     </MDBFooter>

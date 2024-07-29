@@ -7,6 +7,7 @@ import Product from "./product/Product";
 import  {toast} from 'react-toastify';
 import Pagination from 'react-js-pagination';
 import Header from "./layouts/Header";
+import Footer from "./layouts/Footer";
 // import Carousel from "./layouts/Carousal";
 // import Announcements from "./layouts/Announcements";
 // import Contact from "./user/Contact";
@@ -79,6 +80,7 @@ export  default function Home(){
                     </div>
                 </div>
             </section> */}
+            <Footer/>
         </Fragment>
     )
 }
