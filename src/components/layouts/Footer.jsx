@@ -22,7 +22,7 @@ export default function Footer() {
               <h6 className="text-uppercase fw-bold mb-4" style={{ color: '#2F4F4F'}}>
                 e-commers
               </h6>
-              <p>Your online shop for e-commers essentials. Browse through our extensive selection of products including accessories, foods, and live aquatic plants and fishes. Elevate your aquatic hobby with ease, all from the convenience of online shopping.</p>
+              <p>Your online shop for e-commers essentials. Browse through our extensive selection of products including accessories,mobile, and laptop, all from the convenience of online shopping.</p>
             </div>
 
             <div className="col-md-4 mb-4 text-center">
