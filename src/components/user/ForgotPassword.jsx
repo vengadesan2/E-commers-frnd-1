@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { forgotPassword,clearAuthError } from "../../actions/userActions";
+import MetaData from "../layouts/MetaData";
 
 export default function ForgotPassword() {
     const [email, setEmail] = useState("");
@@ -12,13 +13,14 @@ export default function ForgotPassword() {
         e.preventDefault();
         const formData = new FormData();
         formData.append('email', email);
-        const formObject = Object.fromEntries(formData.entries())
-        dispatch(forgotPassword(formObject ))
+        dispatch(forgotPassword(formData))
     }
 
     useEffect(()=>{
         if(message) {
-            toast.success(message)
+            toast.success(message, {
+             
+            })
             setEmail("");
             return;
         }
@@ -33,7 +35,8 @@ export default function ForgotPassword() {
 
 
     return (
-        <div className="row wrapper">
+        <div className="row wrapper" style={{marginTop:"50px"}}>
+            <MetaData title={'Forgot Password'} />
             <div className="col-10 col-lg-5">
                 <form onSubmit={submitHandler} className="shadow-lg">
                     <h1 className="mb-3">Forgot Password</h1>

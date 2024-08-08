@@ -1,10 +1,9 @@
-
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector } from 'react-redux'
 import { register, clearAuthError } from '../../actions/userActions'
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-// import MetaData from '../layouts/MetaData';
+import MetaData from '../layouts/MetaData';
 import avatars from '../../../src/assets/default_avatar.png'
 
 export default function Register() {
@@ -49,7 +48,6 @@ export default function Register() {
     useEffect(()=>{
         if(isAuthenticated) {
             navigate('/');
-            // toast.success("register suseccess")
             return
         }
         if(error)  {
@@ -62,7 +60,7 @@ export default function Register() {
 
     return (
         <div className="row wrapper" style={{marginTop:"50px"}}>
-            {/* <MetaData title={'Register'} /> */}
+            <MetaData title={'Register'} />
             <div className="col-10 col-lg-5">
             <form onSubmit={submitHandler} className="shadow-lg" encType='multipart/form-data'>
                 <h1 className="mb-3" style={{textAlign:"center"}}>Register</h1>
@@ -125,7 +123,7 @@ export default function Register() {
     
                 <button
                 id="register_button"
-                // type="submit"
+                type="submit"
                 className="btn btn-block py-3"
                 disabled={loading}
                 >
