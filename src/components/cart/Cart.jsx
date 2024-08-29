@@ -3,7 +3,7 @@ import { Fragment } from 'react'
 import {useDispatch, useSelector} from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { decreaseCartItemQty, increaseCartItemQty,removeItemFromCart } from '../../slices/cartSlice';
-// import MetaData from '../layouts/MetaData';
+import MetaData from '../layouts/MetaData';
 import { MdDelete } from "react-icons/md";
 
 
@@ -30,7 +30,7 @@ export default function Cart() {
 
     return (
         <Fragment>
-            {/* <MetaData title={'My Cart'} /> */}
+            <MetaData title={'My Cart'} />
             {items.length===0 ? 
                 <h2 className="mt-5">Your Cart is Empty</h2> :
                 <Fragment>

@@ -48,7 +48,7 @@ export const login = (email, password) => async (dispatch) => {
         try {
             dispatch(loginRequest())
             const { data }  = await axios.post(`https://e-commers-back.onrender.com/api/v1/login`,{email,password});
-            // console.log(data);
+            console.log(data).token;
             localStorage.setItem('token',data.token)
             dispatch(loginSuccess(data))
         } catch (error) {
@@ -106,7 +106,7 @@ export const logout =  async (dispatch) => {
 
     try {
         await axios.get(`https://e-commers-back.onrender.com/api/v1/logout`);
-        localStorage.removeItem('token');
+          localStorage.removeItem('token');
         dispatch(logoutSuccess())
     } catch (error) {
         dispatch(logoutFail)

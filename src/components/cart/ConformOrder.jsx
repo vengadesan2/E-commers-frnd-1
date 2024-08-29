@@ -1,5 +1,5 @@
 
-// import MetaData from '../layouts/MetaData';
+import MetaData from '../layouts/MetaData';
 import { Fragment, useEffect } from 'react';
 import { validateShipping } from './Shipping';
 import { useSelector } from 'react-redux';
@@ -34,7 +34,7 @@ export default function ConfirmOrder () {
 
     return (
         <Fragment>
-            {/* <MetaData title={'Confirm Order'} /> */}
+            <MetaData title={'Confirm Order'} />
             <CheckoutSteps shipping confirmOrder />
             <div className="row d-flex justify-content-between">
             <div className="col-12 col-lg-8 mt-5 order-confirm">
