@@ -10,7 +10,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
-
     const { loading, error, isAuthenticated } = useSelector(state => state.authState)
     const redirect = location.search?'/'+location.search.split('=')[1]:'/';
 

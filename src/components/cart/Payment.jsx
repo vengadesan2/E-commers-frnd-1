@@ -1,7 +1,5 @@
-
 import { useElements, useStripe } from "@stripe/react-stripe-js"
 import { CardNumberElement, CardExpiryElement, CardCvcElement } from "@stripe/react-stripe-js";
-import axios from "axios";
 import { useEffect } from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom'
@@ -10,21 +8,23 @@ import { orderCompleted } from "../../slices/cartSlice";
 import {validateShipping} from '../cart/Shipping';
 import {createOrder} from '../../actions/orderActions'
 import { clearError as clearOrderError } from "../../slices/orderSlice";
-
+import AxiosService from "../../utils/AxiosService";
 export default function Payment() {
     const stripe = useStripe();
     const elements = useElements();
     const dispatch = useDispatch()
     const navigate = useNavigate();
-    const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'))
-    const { user } = useSelector(state => state.authState)
+    const orderInfo = JSON.parse(localStorage.getItem('orderInfo'))    
+    const { name} = useSelector(state => state.authState)
     const {items:cartItems, shippingInfo } = useSelector(state => state.cartState)
     const { error:orderError } = useSelector(state => state.orderState)
-
+    const userName =localStorage.getItem('name')
+    const userEmail =localStorage.getItem('email')
+    const userId =localStorage.getItem('id')
     const paymentData = {
         amount : Math.round( orderInfo.totalPrice * 100),
         shipping :{
-            name: user.name,
+            name: userName,
             address:{
                 city: shippingInfo.city,
                 postal_code : shippingInfo.postalCode,
@@ -38,9 +38,12 @@ export default function Payment() {
 
     const order = {
         orderItems: cartItems,
-        shippingInfo
+        shippingInfo,
+        email:userEmail,
+        id:userId
     }
-
+    console.log(order);
+    
     if(orderInfo) {
         order.itemsPrice = orderInfo.itemsPrice
         order.shippingPrice = orderInfo.shippingPrice
@@ -52,65 +55,58 @@ export default function Payment() {
     useEffect(() => {
         validateShipping(shippingInfo, navigate)
         if(orderError) {
-            toast(orderError, {
-                position: toast.POSITION.BOTTOM_CENTER,
-                type: 'error',
+            toast.error(orderError, {
                 onOpen: ()=> { dispatch(clearOrderError()) }
             })
             return
         }
 
-    },[dispatch, navigate, orderError,shippingInfo])
+    },[])
+
+
 
     const submitHandler = async (e) => {
         e.preventDefault();
         document.querySelector('#pay_btn').disabled = true;
         try {
-            const {data} = await axios.post('http://localhost:8000/api/v1/payment/process', paymentData,
-            {
-                headers:{
-                    authorization : localStorage.getItem('token')
-                }
+            const {data} = await AxiosService.post('api/v1/payment/process',paymentData)
+            // const clientSecret = data.client_secret      
+            if(data.success===true){
+                toast.success('Payment Success!')
+                order.paymentInfo = {
+                    id: userId ,
+                    status:true
+                }    
+                dispatch(orderCompleted())
+                dispatch(createOrder(order))
+                navigate('/order/success')
+               
+               
             }
-            )
-            const clientSecret = data.client_secret
-            const result = await stripe.confirmCardPayment(clientSecret, {
-                payment_method: {
-                    card: elements.getElement(CardNumberElement),
-                    billing_details: {
-                        name: user.name,
-                        email: user.email
-                    }
-                }
-            })
-
-            if(result.error){
-                toast(result.error.message, {
-                    type: 'error',
-                    position: toast.POSITION.BOTTOM_CENTER
-                })
-                document.querySelector('#pay_btn').disabled = false;
-            }else{
-                if((await result).paymentIntent.status === 'succeeded') {
-                    toast('Payment Success!', {
-                        type: 'success',
-                        position: toast.POSITION.BOTTOM_CENTER
-                    })
-                    order.paymentInfo = {
-                        id: result.paymentIntent.id,
-                        status: result.paymentIntent.status
-                    }
-                    // dispatch(orderCompleted())
-                    // dispatch(createOrder(order))
-
-                    navigate('/order/success')
-                }else{
-                    toast('Please Try again!', {
-                        type: 'warning',
-                        position: toast.POSITION.BOTTOM_CENTER
-                    })
-                }
+            else{
+                toast.error('Please Try again!')
             }
+
+            //  const result = await stripe.confirmCardPayment(clientSecret, {
+            //     payment_method: {
+            //         card: elements.getElement(CardNumberElement),
+            //         billing_details: {
+            //             name: userName,
+            //             email:userEmail
+            //         }
+            //     }
+            // })
+        
+            // if(result.error){
+            //     toast.error(result.error.message)
+            //     document.querySelector('#pay_btn').disabled = false;
+            // }else{
+            //     if((await result).paymentIntent.status === 'succeeded') {
+                  
+            //     }else{
+                   
+            //     }
+            // }
 
 
         } catch (error) {
@@ -162,8 +158,10 @@ export default function Payment() {
                     >
                     Pay - { ` $${orderInfo && orderInfo.totalPrice}` }
                     </button>
-        
+                  
                 </form>
+             
+        
             </div>
         </div>
     )

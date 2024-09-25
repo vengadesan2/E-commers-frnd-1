@@ -42,18 +42,18 @@ import {
 
 } from '../slices/userSlice'
 import axios from 'axios';
-
 export const login = (email, password) => async (dispatch) => {
-
-        try {
-            dispatch(loginRequest())
-            const { data }  = await axios.post(`https://e-commers-back.onrender.com/api/v1/login`,{email,password});
-            console.log(data).token;
-            localStorage.setItem('token',data.token)
-            dispatch(loginSuccess(data))
-        } catch (error) {
-            dispatch(loginFail(error.response.data.message))
-        }
+    try {
+        dispatch(loginRequest())
+        const { data }  = await axios.post(`https://e-commers-back.onrender.com/api/v1/login`,{email,password});
+        localStorage.setItem('token',data.token)
+        localStorage.setItem('name',data.user.name)
+        localStorage.setItem('email',data.user.email)
+        localStorage.setItem('id',data.user._id)
+        dispatch(loginSuccess(data))
+    } catch (error) {
+        dispatch(loginFail(error.response.data.message))
+    }
 
 }
 
@@ -107,6 +107,8 @@ export const logout =  async (dispatch) => {
     try {
         await axios.get(`https://e-commers-back.onrender.com/api/v1/logout`);
           localStorage.removeItem('token');
+          localStorage.removeItem('name');
+          localStorage.removeItem('email');
         dispatch(logoutSuccess())
     } catch (error) {
         dispatch(logoutFail)

@@ -26,7 +26,9 @@ import UpdateOrder from '../components/admin/UpdateOrder';
 import UserList from '../components/admin/UserList';
 import UpdateUser from '../components/admin/UpdateUser';
 import ReviewList from '../components/admin/ReviewList';
-import {Navigate } from 'react-router-dom'
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+const stripeApiKey ="pk_test_51BTUDGJAJfZb9HEBwDg86TN1KNprHjkfipXmEDMb0gSCassK5T3ZfxsAbcgKVmAIXF7oZ6ItlZZbXO6idTHE67IM007EwQ4uN3"
 const AppRoutes = [
     {
         path:'/',
@@ -95,24 +97,23 @@ const AppRoutes = [
     },
     {
         path:'/order/success',
-        element :<ProtectedRoute><OrderSuccess/></ProtectedRoute>,
+        element :<OrderSuccess/>,
         // exact:true
     },
     {
         path:'/orders',
-        element :<ProtectedRoute><UserOrder/></ProtectedRoute>,
+        element :<UserOrder/>,
         // exact:true
     },
     {
         path:'/order/:id',
-        element :<ProtectedRoute><OrderDetails/></ProtectedRoute>,
+        element :<OrderDetails/>,
         // exact:true
     },
-    // {
-    //     path:'/payment',
-    //     element :<ProtectedRoute><Payment/></ProtectedRoute>,
-    //     // exact:true
-    // },
+    {  
+        path:'/payment',
+        element :<Elements stripe={loadStripe(stripeApiKey)}><Payment/></Elements>,
+    },
     {
         path:'/admin/dashboard',
         element :<ProtectedRoute isAdmin={true}><Dashboard/></ProtectedRoute> ,
@@ -154,13 +155,12 @@ const AppRoutes = [
         path:'/admin/reviews',
         element : <ProtectedRoute isAdmin={true}><ReviewList/></ProtectedRoute> ,
     },
-    {
-        path:'*',
-        element : <Navigate to='/'/>
-    }
+    // {
+    //     path:'*',
+    //     element : <Navigate to='/'/>
+    // }
 ]
 // {/* <Route path='/search/:keyword' element={<ProductSearch/>} /> */}
 
 
-
-export default AppRoutes
+export {AppRoutes} 

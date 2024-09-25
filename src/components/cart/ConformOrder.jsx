@@ -23,7 +23,7 @@ export default function ConfirmOrder () {
             taxPrice,
             totalPrice
         }
-        sessionStorage.setItem('orderInfo', JSON.stringify(data))
+        localStorage.setItem('orderInfo', JSON.stringify(data))
         navigate('/payment')
     }
 
@@ -47,7 +47,7 @@ export default function ConfirmOrder () {
                 <hr />
                 <h4 className="mt-4">Your Cart Items:</h4>
 
-                    {cartItems.map(item => (
+                    {cartItems.map(item => ( 
                             <Fragment>
                                 <div className="cart-item my-1">
                                     <div className="row">

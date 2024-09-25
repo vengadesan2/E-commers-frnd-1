@@ -12,9 +12,11 @@ import Footer from "./layouts/Footer";
 // import Announcements from "./layouts/Announcements";
 // import Contact from "./user/Contact";
 // import Map from "./layouts/Map";
-
-
+// import data from "./data"
 export  default function Home(){
+    // console.log(data);
+    
+   
     const dispatch = useDispatch();
     const {products, loading, error, productsCount, resPerPage} =    useSelector((state) => state.productsState)
     const [currentPage, setCurrentPage] = useState(1);

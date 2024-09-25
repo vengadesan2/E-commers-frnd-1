@@ -74,6 +74,7 @@ export default function ProductDetail () {
             dispatch(clearProduct())
         }
         
+       
 
     },[dispatch,id,isReviewSubmitted, error])
 
