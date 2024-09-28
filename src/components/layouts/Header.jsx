@@ -5,8 +5,8 @@ import Search from './Search';
 import {useDispatch, useSelector} from 'react-redux';
 import {DropdownButton, Dropdown, Image} from 'react-bootstrap';
 import { FaCartShopping } from "react-icons/fa6";
+import { TbTruckDelivery } from "react-icons/tb";
 import { logout } from '../../actions/userActions';
-
 
 export default function Header () {
     const { isAuthenticated, user } = useSelector(state => state.authState);
@@ -19,8 +19,11 @@ export default function Header () {
     const Handlerlogin = () => {
       navigate("/")
     }
+  const checkoutHandler = () =>{
+      navigate('/login?redirect=delivery')
+  }
 
-
+  
     return (
     <nav className="navbar row">
         <div className="col-12 col-md-3">
@@ -62,6 +65,7 @@ export default function Header () {
           }
           <Link to="/cart"  style={{   "textdecoration":" none"}} ><span id="cart" className="ml-3"> <FaCartShopping style={{ color:'white', fontSize: '24px' }}/></span></Link>
           <span className="ml-1" id="cart_count">{cartItems.length}</span>
+          <TbTruckDelivery style={{ cursor:"pointer", color:'white', fontSize: '35px', marginLeft: '13px' }} onClick={() =>checkoutHandler()} />
         </div>
     </nav>
     )

@@ -28,6 +28,8 @@ import UpdateUser from '../components/admin/UpdateUser';
 import ReviewList from '../components/admin/ReviewList';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import { Navigate } from 'react-router-dom';
+import Delivery from '../components/delivery/Delivery'
 const stripeApiKey ="pk_test_51BTUDGJAJfZb9HEBwDg86TN1KNprHjkfipXmEDMb0gSCassK5T3ZfxsAbcgKVmAIXF7oZ6ItlZZbXO6idTHE67IM007EwQ4uN3"
 const AppRoutes = [
     {
@@ -155,10 +157,14 @@ const AppRoutes = [
         path:'/admin/reviews',
         element : <ProtectedRoute isAdmin={true}><ReviewList/></ProtectedRoute> ,
     },
-    // {
-    //     path:'*',
-    //     element : <Navigate to='/'/>
-    // }
+    {
+        path:'/delivery',
+        element : <Delivery/>,
+    },
+    {
+        path:'*',
+        element : <Navigate to='/'/>
+    }
 ]
 // {/* <Route path='/search/:keyword' element={<ProductSearch/>} /> */}
 
