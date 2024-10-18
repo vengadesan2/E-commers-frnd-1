@@ -39,11 +39,11 @@ export default function Payment() {
     const order = {
         orderItems: cartItems,
         shippingInfo,
+        name:userName,
         email:userEmail,
         id:userId
     }
-    console.log(order);
-    
+    // console.log(order);
     if(orderInfo) {
         order.itemsPrice = orderInfo.itemsPrice
         order.shippingPrice = orderInfo.shippingPrice
@@ -70,7 +70,9 @@ export default function Payment() {
         document.querySelector('#pay_btn').disabled = true;
         try {
             const {data} = await AxiosService.post('api/v1/payment/process',paymentData)
-            // const clientSecret = data.client_secret      
+            // const clientSecret = data.client_secret     
+            console.log(data);
+             
             if(data.success===true){
                 toast.success('Payment Success!')
                 order.paymentInfo = {

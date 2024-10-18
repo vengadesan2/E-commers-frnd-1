@@ -32,6 +32,7 @@ function Delivery() {
     </div>
     <div className="delivery-address">
     <h3>Delivery Address</h3>
+    <p>name:{userOrder.name}</p>
     <p>address:{userOrder.shippingInfo.address}</p>
     <p>pincode:{userOrder.shippingInfo.postalCode}</p>
     <p>city:{userOrder.shippingInfo.city},country:{userOrder.shippingInfo.country},phone:{userOrder.shippingInfo.phoneNo}`</p>
