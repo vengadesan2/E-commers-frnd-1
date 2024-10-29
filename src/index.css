@@ -669,7 +669,27 @@ ul.CTAs a {
 }
 /* src/components/OrderSummary.css */
 .order-summary {
-  border: 1px solid #ccc;
-  padding: 10px;
+  border: 1px solid #0f0a0a;
+  border-radius: 10px;
+  padding: 20px ;
+  height: 90vh;
   margin-bottom: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #eeeeee;
+  overflow: hidden;
+  
+}
+.order.b{
+  width: 10px;
+  padding: auto;
+
+}
+.delivery-page{
+  padding: 10px ;
+  background-color:rgb(197, 194, 188);
+  
+}
+.dell{
+  text-align: center;
+  color: #73a9a9;
 }

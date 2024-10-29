@@ -10,15 +10,16 @@ function Delivery() {
         dispatch(userOrdersAction)
     },[])
   return (
-    <div className="delivery-page">
-     <h1>Delivery Information</h1> 
+    <div className="delivery-page ">
+     <h1 className='dell'>Delivery Information</h1> 
      {
      userOrders.map((userOrder,i) => { 
       console.log(userOrder);
       
       return<>
        <div className="order-summary">
-      <h2>Order Summary</h2>
+        <div className='order-b'>
+        <h2 className='c1'>Order Summary</h2>
       <p><strong>Order ID:</strong>{userOrder._id}</p>
       <p><strong>Items:</strong></p>
       <ul>
@@ -29,7 +30,7 @@ function Delivery() {
         </li>
       </ul>
       <p><strong>Total Price:</strong> ${userOrder.totalPrice}</p>
-    </div>
+   
     <div className="delivery-address">
     <h3>Delivery Address</h3>
     <p>name:{userOrder.name}</p>
@@ -44,6 +45,8 @@ function Delivery() {
     <div className="delivery-eta">
       <h3>Estimated Delivery Time</h3>
       <p>3:30 PM - 4:00 PM</p>
+    </div>
+        </div>
     </div>
       </>
       
